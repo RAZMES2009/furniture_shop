@@ -7,6 +7,8 @@ class NewArrivals extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
     final List<Product> _list_products = [
       Product(
         id: 'p1',
@@ -44,19 +46,18 @@ class NewArrivals extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10.0),
               child: SizedBox(
                 width: double.infinity,
-                height: 360,
+                height: mediaQuery.size.height * 0.4,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: _list_products.length,
                   itemBuilder: (BuildContext ctx, int i) => SizedBox(
-                    width: 310,
-                    height: 350,
+                    width: mediaQuery.size.width * 0.79,
                     child: Card(
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      color: const Color.fromRGBO(208, 190, 162, 1),
+                      color: Theme.of(context).colorScheme.background,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -82,11 +83,12 @@ class NewArrivals extends StatelessWidget {
                                   style: const TextStyle(fontSize: 24),
                                 ),
                                 Text(
-                                  _list_products[i].price.toString(),
+                                  '\$${_list_products[i].price.toString()}',
                                   style: const TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromRGBO(63, 105, 0, 1)),
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromRGBO(63, 105, 0, 1),
+                                  ),
                                 ),
                               ],
                             ),

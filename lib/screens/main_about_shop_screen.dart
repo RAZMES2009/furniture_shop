@@ -12,8 +12,8 @@ class MainAboutShopScreen extends StatelessWidget {
     final mediaQuery = MediaQuery.of(context);
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          color: Color.fromRGBO(207, 198, 183, 1),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
         ),
         width: double.infinity,
         height: double.infinity,

@@ -17,6 +17,7 @@ class FurnitureShopApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: const Color.fromRGBO(207, 198, 183, 1),
           secondary: const Color.fromRGBO(255, 255, 255, 0.4),
+          background: const Color.fromARGB(255, 233, 228, 220),
         ),
         fontFamily: 'OldStandartTT',
       ),

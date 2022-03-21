@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/recently_viewed.dart';
 import '../widgets/new_arrivals.dart';
 import '../widgets/hot_deals_cards.dart';
 
@@ -16,7 +17,7 @@ class MainShopScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.shopping_basket_outlined),
+            icon: const Icon(Icons.shopping_cart_outlined),
             onPressed: () {},
           ),
         ],
@@ -24,11 +25,14 @@ class MainShopScreen extends StatelessWidget {
       drawer: const Drawer(
         backgroundColor: Colors.black,
       ),
-      body: Column(
-        children: const [
-          HotDealsCard(),
-          NewArrivals(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            HotDealsCard(),
+            NewArrivals(),
+            RecentlyViewed(),
+          ],
+        ),
       ),
     );
   }
