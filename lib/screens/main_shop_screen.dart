@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/new_arrivals.dart';
 import '../widgets/hot_deals_cards.dart';
 
 class MainShopScreen extends StatelessWidget {
@@ -23,7 +24,12 @@ class MainShopScreen extends StatelessWidget {
       drawer: const Drawer(
         backgroundColor: Colors.black,
       ),
-      body: const HotDealsCard(),
+      body: Column(
+        children: const [
+          HotDealsCard(),
+          NewArrivals(),
+        ],
+      ),
     );
   }
 }
