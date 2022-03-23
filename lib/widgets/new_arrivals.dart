@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/products.dart';
+import '../screens/detail_product_screen.dart';
 
 class NewArrivals extends StatelessWidget {
   const NewArrivals({Key? key}) : super(key: key);
@@ -35,48 +36,57 @@ class NewArrivals extends StatelessWidget {
                   itemCount: dataProducts.items.length,
                   itemBuilder: (BuildContext ctx, int i) => SizedBox(
                     width: mediaQuery.size.width * 0.79,
-                    child: Card(
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      color: Theme.of(context).colorScheme.background,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Image.asset(dataProducts.items[i].imgPath),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon:
-                                      const Icon(Icons.favorite_outline_sharp))
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 25.0),
-                            child: Column(
+                    child: GestureDetector(
+                      onTap: () => Navigator.of(context).pushNamed(
+                          DetailProductScreen.routeName,
+                          arguments: dataProducts.items[i].id),
+                      child: Card(
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        color: Theme.of(context).colorScheme.background,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Text(
-                                  dataProducts.items[i].name,
-                                  style: const TextStyle(fontSize: 24),
+                                SizedBox(
+                                  width: 200,
+                                  child: Image.asset(
+                                      dataProducts.items[i].imgPath),
                                 ),
-                                Text(
-                                  '\$${dataProducts.items[i].price.toString()}',
-                                  style: const TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(63, 105, 0, 1),
-                                  ),
-                                ),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                        Icons.favorite_outline_sharp))
                               ],
                             ),
-                          ),
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.only(left: 25.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    dataProducts.items[i].name,
+                                    style: const TextStyle(fontSize: 24),
+                                  ),
+                                  Text(
+                                    '\$${dataProducts.items[i].price.toString()}',
+                                    style: const TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(63, 105, 0, 1),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

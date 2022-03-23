@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import './models/products.dart';
 import './screens/main_about_shop_screen.dart';
 import './screens/main_shop_screen.dart';
+import './screens/detail_product_screen.dart';
 
 void main() {
   runApp(
@@ -33,6 +34,7 @@ class FurnitureShopApp extends StatelessWidget {
       routes: {
         '/': (ctx) => const MainAboutShopScreen(),
         MainShopScreen.routeName: (ctx) => const MainShopScreen(),
+        DetailProductScreen.routeName:(ctx) => const DetailProductScreen(),
       },
     );
   }
