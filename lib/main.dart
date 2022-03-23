@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import './models/products.dart';
 import './screens/main_about_shop_screen.dart';
 import './screens/main_shop_screen.dart';
 
 void main() {
-  runApp(const FurnitureShopApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Products()),
+      ],
+      child: const FurnitureShopApp(),
+    ),
+  );
 }
 
 class FurnitureShopApp extends StatelessWidget {

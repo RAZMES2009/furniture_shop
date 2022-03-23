@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../models/product.dart';
+import '../models/products.dart';
 
 class NewArrivals extends StatelessWidget {
   const NewArrivals({Key? key}) : super(key: key);
@@ -8,25 +9,7 @@ class NewArrivals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-
-    final List<Product> _list_products = [
-      Product(
-        id: 'p1',
-        imgPath: 'assets/img/carousel_img.png',
-        name: 'Leatherette sofa',
-        description:
-            'Get additional 15% instant discount upto \$10 maximum on selected products',
-        price: 15.99,
-      ),
-      Product(
-        id: 'p2',
-        imgPath: 'assets/img/carousel_img2.png',
-        name: 'Ork Stool',
-        description:
-            'Get additional 15% instant discount upto \$10 maximum on selected products',
-        price: 9.99,
-      ),
-    ];
+    final dataProducts = context.watch<Products>();
 
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
@@ -49,7 +32,7 @@ class NewArrivals extends StatelessWidget {
                 height: mediaQuery.size.height * 0.4,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: _list_products.length,
+                  itemCount: dataProducts.items.length,
                   itemBuilder: (BuildContext ctx, int i) => SizedBox(
                     width: mediaQuery.size.width * 0.79,
                     child: Card(
@@ -66,7 +49,7 @@ class NewArrivals extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Image.asset(_list_products[i].imgPath),
+                              Image.asset(dataProducts.items[i].imgPath),
                               IconButton(
                                   onPressed: () {},
                                   icon:
@@ -79,11 +62,11 @@ class NewArrivals extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  _list_products[i].name,
+                                  dataProducts.items[i].name,
                                   style: const TextStyle(fontSize: 24),
                                 ),
                                 Text(
-                                  '\$${_list_products[i].price.toString()}',
+                                  '\$${dataProducts.items[i].price.toString()}',
                                   style: const TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.bold,
