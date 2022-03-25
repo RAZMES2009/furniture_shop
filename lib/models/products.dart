@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import './product.dart';
 
 class Products with ChangeNotifier {
+  // ignore: non_constant_identifier_names
   final List<Product> _list_products = [
     Product(
       id: 'p1',
@@ -12,6 +13,8 @@ class Products with ChangeNotifier {
       description:
           'Get additional 15% instant discount upto \$10 maximum on selected products',
       price: 15.99,
+      grade: 4.5,
+      reviews: 359,
       isFavorited: false,
       isRecentlyViewed: false,
     ),
@@ -23,6 +26,8 @@ class Products with ChangeNotifier {
       description:
           'Get additional 15% instant discount upto \$10 maximum on selected products',
       price: 9.99,
+      grade: 4.1,
+      reviews: 485,
       isFavorited: false,
       isRecentlyViewed: false,
     ),
@@ -34,6 +39,8 @@ class Products with ChangeNotifier {
       description:
           'Get additional 15% instant discount upto \$10 maximum on selected products',
       price: 18.99,
+      grade: 5.0,
+      reviews: 311,
       isFavorited: false,
       isRecentlyViewed: false,
     ),

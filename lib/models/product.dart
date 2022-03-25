@@ -5,6 +5,8 @@ class Product {
   String color;
   String description;
   double price;
+  double grade;
+  int reviews;
   bool isFavorited;
   bool isRecentlyViewed;
 
@@ -15,6 +17,8 @@ class Product {
     required this.color,
     required this.description,
     required this.price,
+    required this.grade,
+    required this.reviews,
     this.isFavorited = false,
     this.isRecentlyViewed = false,
   });
