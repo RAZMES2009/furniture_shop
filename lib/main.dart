@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './models/products.dart';
+import './providers/products.dart';
 import './screens/main_about_shop_screen.dart';
 import './screens/main_shop_screen.dart';
 import './screens/detail_product_screen.dart';
@@ -11,6 +11,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Products()),
+        // ChangeNotifierProvider(create: (_) => Product()),
       ],
       child: const FurnitureShopApp(),
     ),
@@ -34,7 +35,7 @@ class FurnitureShopApp extends StatelessWidget {
       routes: {
         '/': (ctx) => const MainAboutShopScreen(),
         MainShopScreen.routeName: (ctx) => const MainShopScreen(),
-        DetailProductScreen.routeName:(ctx) => const DetailProductScreen(),
+        DetailProductScreen.routeName: (ctx) => const DetailProductScreen(),
       },
     );
   }

@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/products.dart';
+import '../providers/products.dart';
 import '../screens/detail_product_screen.dart';
 
-class NewArrivals extends StatelessWidget {
+class NewArrivals extends StatefulWidget {
   const NewArrivals({Key? key}) : super(key: key);
 
   @override
+  State<NewArrivals> createState() => _NewArrivalsState();
+}
+
+class _NewArrivalsState extends State<NewArrivals> {
+  @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    final dataProducts = context.watch<Products>();
+    // final productData = Provider.of<Product>(context, listen: false);
+    final productsData = context.watch<Products>();
 
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
@@ -33,13 +39,18 @@ class NewArrivals extends StatelessWidget {
                 height: mediaQuery.size.height * 0.4,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: dataProducts.items.length,
+                  itemCount: productsData.items.length,
                   itemBuilder: (BuildContext ctx, int i) => SizedBox(
                     width: mediaQuery.size.width * 0.79,
                     child: GestureDetector(
-                      onTap: () => Navigator.of(context).pushNamed(
-                          DetailProductScreen.routeName,
-                          arguments: dataProducts.items[i].id),
+                      onTap: () => Navigator.of(context)
+                          .pushNamed(DetailProductScreen.routeName,
+                              arguments: productsData.items[i].id)
+                          .then((value) {
+                        setState(() {
+                          productsData.items[i].isFavorited;
+                        });
+                      }),
                       child: Card(
                         elevation: 0,
                         shape: RoundedRectangleBorder(
@@ -57,12 +68,24 @@ class NewArrivals extends StatelessWidget {
                                 SizedBox(
                                   width: 200,
                                   child: Image.asset(
-                                      dataProducts.items[i].imgPath),
+                                      productsData.items[i].imgPath!),
                                 ),
                                 IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                        Icons.favorite_outline_sharp))
+                                  onPressed: () {
+                                    setState(() {
+                                      productsData.items[i].isFavorited =
+                                          !productsData.items[i].isFavorited;
+                                      print(productsData.items[i].id);
+                                      print(productsData.items[i].isFavorited);
+                                    });
+                                  },
+                                  icon: productsData.items[i].isFavorited
+                                      ? const Icon(
+                                          Icons.favorite,
+                                          color: Colors.red,
+                                        )
+                                      : const Icon(Icons.favorite_outline),
+                                ),
                               ],
                             ),
                             Padding(
@@ -71,11 +94,11 @@ class NewArrivals extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    dataProducts.items[i].name,
+                                    productsData.items[i].name!,
                                     style: const TextStyle(fontSize: 24),
                                   ),
                                   Text(
-                                    '\$${dataProducts.items[i].price.toString()}',
+                                    '\$${productsData.items[i].price.toString()}',
                                     style: const TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
