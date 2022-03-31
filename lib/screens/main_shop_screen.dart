@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/recently_viewed.dart';
+import '../widgets/favorite_viewed.dart';
 import '../widgets/new_arrivals.dart';
 import '../widgets/hot_deals_cards.dart';
 
@@ -30,7 +30,6 @@ class MainShopScreen extends StatelessWidget {
           children: const [
             HotDealsCard(),
             NewArrivals(),
-            RecentlyViewed(),
           ],
         ),
       ),

@@ -49,4 +49,11 @@ class Products with ChangeNotifier {
   List<Product> get items {
     return [..._list_products];
   }
+
+  bool isFavoriteFiled() {
+    if (items.single.isFavorited == false) {
+      return false;
+    }
+    return true;
+  }
 }

@@ -63,24 +63,31 @@ class DetailProduct extends StatelessWidget {
               ),
             ),
           ),
-          const BottomCardDetailScreen(),
+          const BottomInfoCard(),
+          
         ],
       ),
     );
   }
 }
 
-class BottomCardDetailScreen extends StatelessWidget {
-  const BottomCardDetailScreen({
+class BottomInfoCard extends StatelessWidget {
+  const BottomInfoCard({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return buildBottomInfo(context);
+  }
+
+  Center buildBottomInfo(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
     return Center(
       child: SizedBox(
-        width: 380,
-        height: 160,
+        width: mediaQuery.size.width * 0.95,
+        height: mediaQuery.size.height * 0.23,
         child: Card(
           color: Theme.of(context).colorScheme.background,
           elevation: 0,

@@ -17,7 +17,6 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
   @override
   Widget build(BuildContext context) {
     final productsData = context.watch<Products>();
-    // final productData = Provider.of<Product>(context, listen: false);
     final idProduct = ModalRoute.of(context)!.settings.arguments;
     final currentProduct = productsData.items.where((el) => el.id == idProduct);
 
@@ -33,9 +32,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
           IconButton(
             onPressed: () {
               setState(() {
-                currentProduct.single.isFavorited = !currentProduct.single.isFavorited;
-                print(currentProduct.single.id);
-                print(currentProduct.single.isFavorited);
+                currentProduct.single.isFavorited =
+                    !currentProduct.single.isFavorited;
               });
             },
             icon: currentProduct.single.isFavorited
@@ -48,6 +46,24 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
         ],
       ),
       body: DetailProduct(currentProduct: currentProduct),
+      bottomNavigationBar: SizedBox(
+        height: 80,
+        child: Row(
+          children: [
+            const Icon(Icons.shopping_cart),
+            FloatingActionButton.large(
+              onPressed: () {},
+              child: const Text(
+                'Buy now',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+              backgroundColor: Colors.black,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
