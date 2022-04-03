@@ -1,22 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/main_shop_screen.dart';
 import '../screens/detail_product_screen.dart';
 import '../providers/products.dart';
 
-class FavoriteItemScreen extends StatelessWidget {
+class FavoriteItemScreen extends StatefulWidget {
   static const routeName = '/favorite-item-screen';
 
   const FavoriteItemScreen({Key? key}) : super(key: key);
 
   @override
+  State<FavoriteItemScreen> createState() => _FavoriteItemScreenState();
+}
+
+class _FavoriteItemScreenState extends State<FavoriteItemScreen> {
+  @override
   Widget build(BuildContext context) {
     final productsData = context.watch<Products>();
     final mediaQuery = MediaQuery.of(context);
-
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).popAndPushNamed(MainShopScreen.routeName);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
         elevation: 0,
         title: const Text(
           'Favorite',
@@ -46,7 +57,7 @@ class FavoriteItemScreen extends StatelessWidget {
                               ),
                               child: SizedBox(
                                 width: double.infinity,
-                                height: mediaQuery.size.height * 0.13,
+                                height: mediaQuery.size.height * 0.14,
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -91,11 +102,28 @@ class FavoriteItemScreen extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(
-                                            Icons.shopping_cart_outlined),
-                                        iconSize: 32,
+                                      Column(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                productsData
+                                                        .items[i].isFavorited =
+                                                    !productsData
+                                                        .items[i].isFavorited;
+                                              });
+                                            },
+                                            icon: const Icon(Icons.close),
+                                            iconSize: 23,
+                                            color: Colors.grey,
+                                          ),
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(
+                                                Icons.shopping_cart_outlined),
+                                            iconSize: 32,
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),

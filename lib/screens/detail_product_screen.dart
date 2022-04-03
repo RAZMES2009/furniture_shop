@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +14,25 @@ class DetailProductScreen extends StatefulWidget {
 }
 
 class _DetailProductScreenState extends State<DetailProductScreen> {
+  SnackBar showSnackBarFavorite(
+      BuildContext context, Products productsData, String id) {
+    return SnackBar(
+      duration: const Duration(seconds: 2),
+      action: SnackBarAction(
+        textColor: Theme.of(context).colorScheme.error,
+        disabledTextColor: Theme.of(context).colorScheme.error,
+        label: 'Undo',
+        onPressed: () {
+          setState(() {
+            productsData.items.firstWhere((el) => el.id == id).isFavorited =
+                !productsData.items.firstWhere((el) => el.id == id).isFavorited;
+          });
+        },
+      ),
+      content: const Text('Added to favorite!'),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final productsData = context.watch<Products>();
@@ -37,6 +54,10 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                 currentProduct.single.isFavorited =
                     !currentProduct.single.isFavorited;
               });
+              ScaffoldMessenger.of(context).showSnackBar(
+                showSnackBarFavorite(
+                    context, productsData, currentProduct.single.id!),
+              );
             },
             icon: currentProduct.single.isFavorited
                 ? const Icon(

@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../screens/favorite_item_screen.dart';
 
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends StatefulWidget {
   const MyDrawer({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<MyDrawer> createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -29,8 +34,8 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () =>
-                  Navigator.of(context).pushNamed(FavoriteItemScreen.routeName),
+              onPressed: () => Navigator.of(context)
+                  .pushReplacementNamed(FavoriteItemScreen.routeName),
               child: const Text(
                 'Favorite',
                 style: TextStyle(color: Colors.black, fontSize: 28),

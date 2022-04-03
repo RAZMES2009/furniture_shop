@@ -64,7 +64,6 @@ class DetailProduct extends StatelessWidget {
             ),
           ),
           const BottomInfoCard(),
-          
         ],
       ),
     );

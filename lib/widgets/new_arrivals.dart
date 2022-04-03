@@ -12,10 +12,28 @@ class NewArrivals extends StatefulWidget {
 }
 
 class _NewArrivalsState extends State<NewArrivals> {
+  SnackBar showSnackBarFavorite(
+      BuildContext context, Products productsData, int i) {
+    return SnackBar(
+      duration: const Duration(seconds: 2),
+      action: SnackBarAction(
+        textColor: Theme.of(context).colorScheme.error,
+        disabledTextColor: Theme.of(context).colorScheme.error,
+        label: 'Undo',
+        onPressed: () {
+          setState(() {
+            productsData.items[i].isFavorited =
+                !productsData.items[i].isFavorited;
+          });
+        },
+      ),
+      content: const Text('Added to favorite!'),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    // final productData = Provider.of<Product>(context, listen: false);
     final productsData = context.watch<Products>();
 
     return Padding(
@@ -46,7 +64,7 @@ class _NewArrivalsState extends State<NewArrivals> {
                       onTap: () => Navigator.of(context)
                           .pushNamed(DetailProductScreen.routeName,
                               arguments: productsData.items[i].id)
-                          .then((value) {
+                          .then((_) {
                         setState(() {
                           productsData.items[i].isFavorited;
                         });
@@ -66,16 +84,22 @@ class _NewArrivalsState extends State<NewArrivals> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 SizedBox(
-                                  width: 200,
+                                  width: mediaQuery.size.width * 0.5,
                                   child: Image.asset(
                                       productsData.items[i].imgPath!),
                                 ),
                                 IconButton(
                                   onPressed: () {
+                                    ScaffoldMessenger.of(context)
+                                        .hideCurrentSnackBar();
                                     setState(() {
                                       productsData.items[i].isFavorited =
                                           !productsData.items[i].isFavorited;
                                     });
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      showSnackBarFavorite(
+                                          context, productsData, i),
+                                    );
                                   },
                                   icon: productsData.items[i].isFavorited
                                       ? const Icon(
