@@ -5,6 +5,7 @@ import './providers/products.dart';
 import './screens/main_about_shop_screen.dart';
 import './screens/main_shop_screen.dart';
 import './screens/detail_product_screen.dart';
+import './screens/favorite_item_screen.dart';
 
 void main() {
   runApp(
@@ -27,7 +28,6 @@ class FurnitureShopApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: const Color.fromRGBO(207, 198, 183, 1),
-          secondary: const Color.fromRGBO(255, 255, 255, 0.4),
           background: const Color.fromARGB(255, 233, 228, 220),
         ),
         fontFamily: 'OldStandartTT',
@@ -36,6 +36,7 @@ class FurnitureShopApp extends StatelessWidget {
         '/': (ctx) => const MainAboutShopScreen(),
         MainShopScreen.routeName: (ctx) => const MainShopScreen(),
         DetailProductScreen.routeName: (ctx) => const DetailProductScreen(),
+        FavoriteItemScreen.routeName: (ctx) => const FavoriteItemScreen(),
       },
     );
   }

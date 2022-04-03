@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/favorite_viewed.dart';
+import '../widgets/my_drawer.dart';
 import '../widgets/new_arrivals.dart';
 import '../widgets/hot_deals_cards.dart';
 
@@ -22,9 +22,7 @@ class MainShopScreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: const Drawer(
-        backgroundColor: Colors.black,
-      ),
+      drawer: const MyDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: const [

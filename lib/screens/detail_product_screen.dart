@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,23 +48,37 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
         ],
       ),
       body: DetailProduct(currentProduct: currentProduct),
-      bottomNavigationBar: SizedBox(
-        height: 80,
-        child: Row(
-          children: [
-            const Icon(Icons.shopping_cart),
-            FloatingActionButton.large(
-              onPressed: () {},
-              child: const Text(
-                'Buy now',
-                style: TextStyle(
+      bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.shopping_cart_outlined),
+              Text(
+                currentProduct.single.price.toString(),
+                style: const TextStyle(
+                  color: Color.fromRGBO(63, 105, 0, 1),
                   fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              backgroundColor: Colors.black,
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: SizedBox(
+              width: 200,
+              height: 40,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Text('Add to cart'),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.black),
+                ),
+              ),
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

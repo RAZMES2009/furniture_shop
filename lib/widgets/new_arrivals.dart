@@ -75,8 +75,6 @@ class _NewArrivalsState extends State<NewArrivals> {
                                     setState(() {
                                       productsData.items[i].isFavorited =
                                           !productsData.items[i].isFavorited;
-                                      print(productsData.items[i].id);
-                                      print(productsData.items[i].isFavorited);
                                     });
                                   },
                                   icon: productsData.items[i].isFavorited
