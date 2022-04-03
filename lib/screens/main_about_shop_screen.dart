@@ -46,7 +46,8 @@ class MainAboutShopScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 20),
                     ),
                     ElevatedButton(
-                      onPressed: () => Navigator.pushReplacementNamed(context, MainShopScreen.routeName),
+                      onPressed: () => Navigator.of(context)
+                          .pushReplacementNamed(MainShopScreen.routeName),
                       style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(Size(
                             mediaQuery.size.width * 0.6,

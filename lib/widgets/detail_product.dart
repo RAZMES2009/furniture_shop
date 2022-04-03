@@ -12,59 +12,65 @@ class DetailProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 35),
-            child: Text(
-              currentProduct.single.name!,
-              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Center(
-            child: Image.asset(
-              currentProduct.single.imgPath!,
-            ),
-          ),
-          SizedBox(
-            width: 300,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10.0, top: 35),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 35),
               child: Text(
-                '${currentProduct.single.name}, ${currentProduct.single.color}',
-                style: const TextStyle(fontSize: 22),
+                currentProduct.single.name!,
+                style:
+                    const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
-            child: IntrinsicHeight(
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.star,
-                    size: 20,
-                  ),
-                  Text(
-                    currentProduct.single.grade.toString(),
-                    style: const TextStyle(fontSize: 18, color: Colors.grey),
-                  ),
-                  const VerticalDivider(
-                    color: Colors.black,
-                    width: 20,
-                  ),
-                  Text(
-                    '${currentProduct.single.reviews} reviews',
-                    style: const TextStyle(fontSize: 18, color: Colors.grey),
-                  ),
-                ],
+            Center(
+              child: Image.asset(
+                currentProduct.single.imgPath!,
               ),
             ),
-          ),
-          const BottomInfoCard(),
-        ],
+            SizedBox(
+              width: mediaQuery.size.width * 0.8,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 35),
+                child: Text(
+                  '${currentProduct.single.name}, ${currentProduct.single.color}',
+                  style: const TextStyle(fontSize: 22),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: IntrinsicHeight(
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.star,
+                      size: 20,
+                    ),
+                    Text(
+                      currentProduct.single.grade.toString(),
+                      style: const TextStyle(fontSize: 18, color: Colors.grey),
+                    ),
+                    const VerticalDivider(
+                      color: Colors.black,
+                      width: 20,
+                    ),
+                    Text(
+                      '${currentProduct.single.reviews} reviews',
+                      style: const TextStyle(fontSize: 18, color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const BottomInfoCard(),
+          ],
+        ),
       ),
     );
   }

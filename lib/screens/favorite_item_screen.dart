@@ -36,52 +36,56 @@ class _FavoriteItemScreenState extends State<FavoriteItemScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 20.0),
-        child: SizedBox(
-          width: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: SizedBox(
-                    width: mediaQuery.size.width * 0.9,
-                    height: mediaQuery.size.height,
-                    child: ListView.builder(
-                      itemCount: productsData.items.length,
-                      itemBuilder: (BuildContext ctx, int i) => productsData
-                              .items[i].isFavorited
-                          ? GestureDetector(
-                              onTap: () => Navigator.of(context).pushNamed(
-                                DetailProductScreen.routeName,
-                                arguments: productsData.items[i].id,
-                              ),
-                              child: SizedBox(
-                                width: double.infinity,
-                                height: mediaQuery.size.height * 0.14,
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  color:
-                                      Theme.of(context).colorScheme.background,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Card(
-                                        elevation: 0,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: SizedBox(
-                                          width: mediaQuery.size.width * 0.25,
-                                          height: mediaQuery.size.height * 0.1,
-                                          child: Image.asset(
-                                              productsData.items[i].imgPath!),
-                                        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: SizedBox(
+                  width: mediaQuery.size.width * 0.9,
+                  height: mediaQuery.size.height,
+                  child: ListView.builder(
+                    itemCount: productsData.items.length,
+                    itemBuilder: (BuildContext ctx, int i) => productsData
+                            .items[i].isFavorited
+                        ? GestureDetector(
+                            onTap: () => Navigator.of(context)
+                                .pushNamed(
+                              DetailProductScreen.routeName,
+                              arguments: productsData.items[i].id,
+                            )
+                                .then((_) {
+                              setState(() {
+                                productsData.items[i].isFavorited;
+                              });
+                            }),
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: mediaQuery.size.height * 0.14,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                color: Theme.of(context).colorScheme.background,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Card(
+                                      elevation: 0,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
-                                      Column(
+                                      child: SizedBox(
+                                        width: mediaQuery.size.width * 0.25,
+                                        height: mediaQuery.size.height * 0.1,
+                                        child: Image.asset(
+                                            productsData.items[i].imgPath!),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: mediaQuery.size.width * 0.4,
+                                      child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
                                         children: [
@@ -102,40 +106,40 @@ class _FavoriteItemScreenState extends State<FavoriteItemScreen> {
                                           ),
                                         ],
                                       ),
-                                      Column(
-                                        children: [
-                                          IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                productsData
-                                                        .items[i].isFavorited =
-                                                    !productsData
-                                                        .items[i].isFavorited;
-                                              });
-                                            },
-                                            icon: const Icon(Icons.close),
-                                            iconSize: 23,
-                                            color: Colors.grey,
-                                          ),
-                                          IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                                Icons.shopping_cart_outlined),
-                                            iconSize: 32,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                    Column(
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              productsData
+                                                      .items[i].isFavorited =
+                                                  !productsData
+                                                      .items[i].isFavorited;
+                                            });
+                                          },
+                                          icon: const Icon(Icons.close),
+                                          iconSize: 23,
+                                          color: Colors.grey,
+                                        ),
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                              Icons.shopping_cart_outlined),
+                                          iconSize: 32,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
-                            )
-                          : const SizedBox(),
-                    ),
+                            ),
+                          )
+                        : const SizedBox(),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

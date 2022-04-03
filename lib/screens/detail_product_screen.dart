@@ -16,6 +16,8 @@ class DetailProductScreen extends StatefulWidget {
 class _DetailProductScreenState extends State<DetailProductScreen> {
   SnackBar showSnackBarFavorite(
       BuildContext context, Products productsData, String id) {
+    bool isFavorite =
+        productsData.items.firstWhere((el) => el.id == id).isFavorited;
     return SnackBar(
       duration: const Duration(seconds: 2),
       action: SnackBarAction(
@@ -29,7 +31,9 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
           });
         },
       ),
-      content: const Text('Added to favorite!'),
+      content: isFavorite
+          ? const Text('Added to favorite!')
+          : const Text('Delete from favorite!'),
     );
   }
 
@@ -50,6 +54,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
           ),
           IconButton(
             onPressed: () {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
               setState(() {
                 currentProduct.single.isFavorited =
                     !currentProduct.single.isFavorited;
@@ -88,8 +93,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: SizedBox(
-              width: 200,
-              height: 40,
+              width: MediaQuery.of(context).size.width * 0.5,
+              height: MediaQuery.of(context).size.height * 0.05,
               child: ElevatedButton(
                 onPressed: () {},
                 child: const Text('Add to cart'),

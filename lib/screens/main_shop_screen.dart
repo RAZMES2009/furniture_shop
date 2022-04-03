@@ -23,13 +23,11 @@ class MainShopScreen extends StatelessWidget {
         ],
       ),
       drawer: const MyDrawer(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: const [
-            HotDealsCard(),
-            NewArrivals(),
-          ],
-        ),
+      body: Column(
+        children: const [
+          HotDealsCard(),
+          NewArrivals(),
+        ],
       ),
     );
   }

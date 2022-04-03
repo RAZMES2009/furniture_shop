@@ -12,7 +12,6 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Products()),
-        // ChangeNotifierProvider(create: (_) => Product()),
       ],
       child: const FurnitureShopApp(),
     ),
