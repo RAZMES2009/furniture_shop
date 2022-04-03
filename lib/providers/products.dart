@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './product.dart';
+import '../models/product.dart';
 
 class Products with ChangeNotifier {
   // ignore: non_constant_identifier_names
@@ -16,7 +16,7 @@ class Products with ChangeNotifier {
       grade: 4.5,
       reviews: 359,
       isFavorited: false,
-      isRecentlyViewed: false,
+      isOrder: false,
     ),
     Product(
       id: 'p2',
@@ -29,7 +29,7 @@ class Products with ChangeNotifier {
       grade: 4.1,
       reviews: 485,
       isFavorited: false,
-      isRecentlyViewed: false,
+      isOrder: false,
     ),
     Product(
       id: 'p3',
@@ -42,7 +42,7 @@ class Products with ChangeNotifier {
       grade: 5.0,
       reviews: 311,
       isFavorited: false,
-      isRecentlyViewed: false,
+      isOrder: false,
     ),
   ];
 

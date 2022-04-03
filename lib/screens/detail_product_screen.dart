@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/cart_product.dart';
 import '../providers/products.dart';
 import '../widgets/detail_product.dart';
 
@@ -40,6 +41,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
   @override
   Widget build(BuildContext context) {
     final productsData = context.watch<Products>();
+    final cartData = context.watch<Cart>();
     final idProduct = ModalRoute.of(context)!.settings.arguments;
     final currentProduct = productsData.items.where((el) => el.id == idProduct);
 
@@ -96,8 +98,31 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               width: MediaQuery.of(context).size.width * 0.5,
               height: MediaQuery.of(context).size.height * 0.05,
               child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Add to cart'),
+                onPressed: () {
+                  setState(() {
+                    if (!currentProduct.single.isOrder) {
+                      currentProduct.single.isOrder =
+                          !currentProduct.single.isOrder;
+                      cartData.addProduct(
+                        id: currentProduct.single.id!,
+                        imgPath: currentProduct.single.imgPath!,
+                        name: currentProduct.single.name!,
+                        price: currentProduct.single.price!,
+                      );
+                    } else {
+                      cartData.addProduct(
+                        id: currentProduct.single.id!,
+                        imgPath: currentProduct.single.imgPath!,
+                        name: currentProduct.single.name!,
+                        price: currentProduct.single.price!,
+                      );
+                    }
+                  });
+                  print(cartData.items.length);
+                },
+                child: currentProduct.single.isOrder
+                    ? const Text('Add one more')
+                    : const Text('Add to cart'),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.black),
                 ),

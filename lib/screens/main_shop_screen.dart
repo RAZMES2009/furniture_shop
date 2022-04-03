@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_shop/screens/cart_screen.dart';
 
 import '../widgets/my_drawer.dart';
 import '../widgets/new_arrivals.dart';
@@ -18,7 +19,8 @@ class MainShopScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined),
-            onPressed: () {},
+            onPressed: () =>
+                Navigator.of(context).pushNamed(CartScreen.routeName),
           ),
         ],
       ),
